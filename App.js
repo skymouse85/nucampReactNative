@@ -1,4 +1,4 @@
-import { Main } from "./screens/MainComponent";
+import Main from "./screens/MainComponent";
 
 const App = () => {
   return (
