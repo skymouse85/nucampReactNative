@@ -2,8 +2,8 @@ import { Main } from "./screens/MainComponent";
 
 const App = () => {
   return (
-    <Main />;
-     )
+    <Main />
+  )
 }
 
 export default App
