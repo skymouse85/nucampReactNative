@@ -10,6 +10,10 @@ const CampsiteInfoScreen = ({ route }) => {
     const { campsite } = route.params;
     // state variable and setting function with the useState hook being passed comments
     const [comments, setComments] = useState(COMMENTS);
+    // favorite state variable initialized to false
+    const [favorite, setFavorite] = useState(false);
+
+
     // render comment variable - destructures an item in the param list and returns text in a view
     const renderCommentItem = ({ item }) => {
         return (
@@ -44,6 +48,8 @@ const CampsiteInfoScreen = ({ route }) => {
                 <>
                     <RenderCampsite
                         campsite={campsite}
+                        isFavorite={favorite}
+                        markFavorite={() => setFavorite(true)}
                     />
                     <Text style={styles.commentsTitle}>Comments</Text>
                 </>
