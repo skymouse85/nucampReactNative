@@ -12,7 +12,6 @@ const RenderCampsite = (props) => {
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <Text
                             style={{
-                                color: 'white',
                                 textAlign: 'center',
                                 fontSize: 20
                             }}
