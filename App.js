@@ -6,12 +6,12 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const App = () => {
   return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Provider store={store}>
+    <SafeAreaProvider >
+      <Provider store={store}>
+        <NavigationContainer>
           <Main />
-        </Provider>
-      </NavigationContainer>
+        </NavigationContainer>
+      </Provider>
     </SafeAreaProvider>
   )
 }

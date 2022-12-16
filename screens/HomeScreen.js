@@ -3,12 +3,11 @@ import { Card } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 
-
 const FeaturedItem = ({ item }) => {
     if (item) {
         return (
             <Card containerStyle={{ padding: 0 }}>
-                <Card.Image source={{ uri: baseUrl = item.image }}>
+                <Card.Image source={{ uri: baseUrl + item.image }}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <Text
                             style={{
@@ -34,7 +33,9 @@ const HomeScreen = () => {
     const partners = useSelector((state) => state.partners);
 
     const featCampsite = campsites.campsitesArray.find((item) => item.featured);
-    const featPromotion = promotions.promotionsArray.find((item) => item.featured);
+    const featPromotion = promotions.promotionsArray.find(
+        (item) => item.featured
+    );
     const featPartner = partners.partnersArray.find((item) => item.featured);
 
     return (
