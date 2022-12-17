@@ -1,8 +1,11 @@
-import { FlatList, StyleSheet, Text, View, Button, Modal } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Button, Modal, TextInput, SafeAreaView } from 'react-native';
 import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import RenderCampsite from '../features/campsites/RenderCampsite';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
+import { Rating, Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 
 
 
@@ -14,8 +17,28 @@ const CampsiteInfoScreen = ({ route }) => {
     const favorites = useSelector((state) => state.favorites);
     const dispatch = useDispatch();
     const [showModal, setShowModal] = useState(false);
+    const [rating, setRating] = useState(5);
+    const [author, setAuthor] = useState('');
+    const [text, setText] = useState('');
 
 
+
+    const handleSubmit = () => {
+        const newComment = {
+            author,
+            rating,
+            text,
+            campsiteId: campsite.id
+        }
+        console.log(newComment);
+        setShowModal(!showModal);
+    }
+
+    const resetForm = () => {
+        setRating(5);
+        setAuthor('');
+        setText('');
+    };
 
     // render comment variable - destructures an item in the param list and returns text in a view
     const renderCommentItem = ({ item }) => {
@@ -67,6 +90,35 @@ const CampsiteInfoScreen = ({ route }) => {
                 onRequestClose={() => setShowModal(!showModal)}
             >
                 <View style={styles.Modal}>
+                    <Rating
+                        showRating
+                        startingValue={rating}
+                        imageSize={40}
+                        onFinishRating={(rating) => setRating(rating)}
+                        style={{ paddingVertical: 10 }}
+                    />
+                    <Input
+                        placeholder='Author'
+                        leftIcon={{
+                            type: 'font-awesome',
+                            name: 'user-o'
+                        }}
+                        leftIconContainerStyle={{ paddingRight: 10 }}
+                        onChangeText={(text) => setText(text)}
+                        value={text}
+
+                    />
+                    <Input
+                        placeholder='Comment'
+                        leftIcon={{
+                            type: 'font-awesome',
+                            name: 'comment-o'
+                        }}
+                        leftIconContainerStyle={{ paddingRight: 10 }}
+                        onChangeText={(text) => setText(text)}
+                        value={text}
+
+                    />
                     <View style={{ margin: 10 }}>
                         <Button
                             onPress={() => {

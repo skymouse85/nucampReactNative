@@ -28,7 +28,7 @@ const ReservationScreen = () => {
         setHikeIn(false);
         setDate(new Date());
         setShowCalendar(false);
-    }
+    };
 
     return (
         <ScrollView>
