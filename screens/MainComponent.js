@@ -96,7 +96,6 @@ const ContactNavigator = () => {
     );
 };
 
-
 const ReservationNavigator = () => {
     const Stack = createStackNavigator();
     return (
