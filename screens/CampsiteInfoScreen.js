@@ -1,4 +1,5 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View, Button, Modal } from 'react-native';
+import { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import RenderCampsite from '../features/campsites/RenderCampsite';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
@@ -12,6 +13,7 @@ const CampsiteInfoScreen = ({ route }) => {
     const comments = useSelector((state) => state.comments);
     const favorites = useSelector((state) => state.favorites);
     const dispatch = useDispatch();
+    const [showModal, setShowModal] = useState(false);
 
 
 
@@ -30,32 +32,53 @@ const CampsiteInfoScreen = ({ route }) => {
 
     // using flatlist to render comments
     return (
-        <FlatList
-            //data prop
-            data={comments.commentsArray.filter(
-                //return comments whose id's match campsite id
-                (comment) => comment.campsiteId === campsite.id
-            )}
-            //render item prop set equal to render comment item variable
-            renderItem={renderCommentItem}
-            //key extractor prop since all items have a unique key, the extracor prop can be used to get the key
-            keyExtractor={(item) => item.id.toString()}
-            // content container prop to add to flatlist rendering
-            contentContainerStyle={{
-                marginHorizontal: 20,
-                paddingVertical: 20
-            }}
-            ListHeaderComponent={
-                <>
-                    <RenderCampsite
-                        campsite={campsite}
-                        isFavorite={favorites.includes(campsite.id)}
-                        markFavorite={() => dispatch(toggleFavorite(campsite.id))}
-                    />
-                    <Text style={styles.commentsTitle}>Comments</Text>
-                </>
-            }
-        />
+        <>
+            <FlatList
+                //data prop
+                data={comments.commentsArray.filter(
+                    //return comments whose id's match campsite id
+                    (comment) => comment.campsiteId === campsite.id
+                )}
+                //render item prop set equal to render comment item variable
+                renderItem={renderCommentItem}
+                //key extractor prop since all items have a unique key, the extracor prop can be used to get the key
+                keyExtractor={(item) => item.id.toString()}
+                // content container prop to add to flatlist rendering
+                contentContainerStyle={{
+                    marginHorizontal: 20,
+                    paddingVertical: 20
+                }}
+                ListHeaderComponent={
+                    <>
+                        <RenderCampsite
+                            campsite={campsite}
+                            isFavorite={favorites.includes(campsite.id)}
+                            markFavorite={() => dispatch(toggleFavorite(campsite.id))}
+                            onShowModal={() => setShowModal(!showModal)}
+                        />
+                        <Text style={styles.commentsTitle}>Comments</Text>
+                    </>
+                }
+            />
+            <Modal
+                animationType='slide'
+                transparent={false}
+                visible={showModal}
+                onRequestClose={() => setShowModal(!showModal)}
+            >
+                <View style={styles.Modal}>
+                    <View style={{ margin: 10 }}>
+                        <Button
+                            onPress={() => {
+                                setShowModal(!showModal)
+                            }}
+                            color='#808080'
+                            title='Cancel'
+                        />
+                    </View>
+                </View>
+            </Modal>
+        </>
     );
 };
 
@@ -73,6 +96,10 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 20,
         backgroundColor: '#fff'
+    },
+    Modal: {
+        justifyContent: 'center',
+        margin: 20
     }
 });
 
