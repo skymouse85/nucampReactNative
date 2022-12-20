@@ -45,7 +45,12 @@ const CampsiteInfoScreen = ({ route }) => {
         return (
             <View style={styles.commentItem}>
                 <Text style={{ fontSize: 14 }}>{item.text}</Text>
-                <Text style={{ fontSize: 12 }}>{item.rating} Stars</Text>
+                <Rating
+                    startingValue={rating}
+                    imageSize={10}
+                    style={{ alignItems: 'flex-start', paddingVertical: '5%' }}
+                    readonly
+                />
                 <Text style={{ fontSize: 12 }}>
                     {`-- ${item.author}, ${item.date}`}
                 </Text>
@@ -121,8 +126,20 @@ const CampsiteInfoScreen = ({ route }) => {
                     />
                     <View style={{ margin: 10 }}>
                         <Button
+                            title='Submit'
+                            color='#5637DD'
                             onPress={() => {
-                                setShowModal(!showModal)
+                                handleSubmit();
+                                resetForm();
+                            }}
+                        />
+
+                    </View>
+                    <View style={{ margin: 10 }}>
+                        <Button
+                            onPress={() => {
+                                setShowModal(!showModal);
+                                resetForm();
                             }}
                             color='#808080'
                             title='Cancel'
