@@ -1,0 +1,9 @@
+Three principals of Redux
+ - Single Source of Truth
+ - State is read only
+ - Canges are made with pure functions
+
+
+ ip address - 192.168.1.68.
+
+ stopped exercise 3 at 8:15 with a dependency issue.
