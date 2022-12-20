@@ -5,6 +5,8 @@ import RenderCampsite from '../features/campsites/RenderCampsite';
 import { toggleFavorite } from '../features/favorites/favoritesSlice';
 import { Rating, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { postComment } from '../features/comments/commentsSlice';
+import { commentsReducer } from '../features/comments/commentsSlice';
 
 
 
@@ -30,7 +32,7 @@ const CampsiteInfoScreen = ({ route }) => {
             text,
             campsiteId: campsite.id
         }
-        console.log(newComment);
+        dispatch(postComment(newComment));
         setShowModal(!showModal);
     }
 
@@ -109,8 +111,8 @@ const CampsiteInfoScreen = ({ route }) => {
                             name: 'user-o'
                         }}
                         leftIconContainerStyle={{ paddingRight: 10 }}
-                        onChangeText={(text) => setText(text)}
-                        value={text}
+                        onChangeText={author => setAuthor(author)}
+                        value={author}
 
                     />
                     <Input
@@ -120,7 +122,7 @@ const CampsiteInfoScreen = ({ route }) => {
                             name: 'comment-o'
                         }}
                         leftIconContainerStyle={{ paddingRight: 10 }}
-                        onChangeText={(text) => setText(text)}
+                        onChangeText={text => setText(text)}
                         value={text}
 
                     />
@@ -173,3 +175,4 @@ const styles = StyleSheet.create({
 });
 
 export default CampsiteInfoScreen;
+
