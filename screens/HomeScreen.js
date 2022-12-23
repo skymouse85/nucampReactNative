@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading from '../components/loadingComponent';
 import finalPropsSelectorFactory from 'react-redux/es/connect/selectorFactory';
+import * as Animatable from 'react-native-animatable';
 
 const FeaturedItem = (props) => {
     const { item } = props;
