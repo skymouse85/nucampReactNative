@@ -7,6 +7,7 @@ import { Rating, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { postComment } from '../features/comments/commentsSlice';
 import { commentsReducer } from '../features/comments/commentsSlice';
+import * as Animatable from 'react-native-animatable';
 
 
 
@@ -62,7 +63,12 @@ const CampsiteInfoScreen = ({ route }) => {
 
     // using flatlist to render comments
     return (
-        <>
+        <
+            Animatable.View
+            animation='fadeInUp'
+            duration={2000}
+            delay={1000}
+        >
             <FlatList
                 //data prop
                 data={comments.commentsArray.filter(
@@ -149,7 +155,7 @@ const CampsiteInfoScreen = ({ route }) => {
                     </View>
                 </View>
             </Modal>
-        </>
+        </Animatable.View>
     );
 };
 
