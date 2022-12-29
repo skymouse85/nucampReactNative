@@ -7,3 +7,5 @@ Three principals of Redux
  ip address - 192.168.1.68.
 
  stopped exercise 3 at 8:15 with a dependency issue.
+
+  json-server -H 0.0.0.0 --watch db.json -p 3001
